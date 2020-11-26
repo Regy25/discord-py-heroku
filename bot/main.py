@@ -13,7 +13,7 @@ async def on_ready():
 
 @komi.event
 async def on_member_join(member):
-    role = discord.utils.get(member.guild.roles, name="Bot Tester")
+    role = discord.utils.get(member.guild.roles, name="Panes")
     await discord.Member.add_roles(member, role)
     print(f'{member} se le dio el rol: {role}')
 
