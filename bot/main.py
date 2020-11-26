@@ -1,7 +1,7 @@
 import os
 import discord
 from discord.ext import commands
-
+#test
 intents = discord.Intents.all()
 
 komi = commands.Bot(command_prefix={'!k','!k '},intents=intents)
