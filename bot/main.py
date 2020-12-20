@@ -21,7 +21,7 @@ async def on_member_join(member):
 async def ping(ctx):
     await ctx.channel.send("pong")
 
-@bot.command(pass_context = True)
+@komi.command(pass_context = True)
 @commands.has_role("Magic")
 async def Magic(ctx):
     await ctx.channel.send(f"!!!!!! ({ctx.author.name} los convoca a @Magic)")
