@@ -23,9 +23,8 @@ async def ping(ctx):
 
 @komi.command(pass_context = True)
 @commands.has_role("Magic")
-async def Magic(ctx):
-    msg = 'Magic'.format(role.mention) 
-    await ctx.channel.send(f"!!!!!! ({ctx.author.name} los convoca a {msg})")
+async def magic(ctx): 
+    await ctx.channel.send(f"!!!!!! ({ctx.author.name} los convoca a {discord.utils.get(ctx.guild.roles, name="Magic").mention})")
 
 
 if __name__ == "__main__":
