@@ -11,8 +11,7 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 async def on_ready():
     print('!!!')
 
-@komi.event(pass_context = True)
-@commands.has_role("Panes")
+@komi.event
 async def on_member_join(member):
     role = discord.utils.get(member.guild.roles, name="Panes")
     await discord.Member.add_roles(member, role)
