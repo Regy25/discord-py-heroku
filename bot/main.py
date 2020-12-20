@@ -20,6 +20,12 @@ async def on_member_join(member):
 @komi.command()
 async def ping(ctx):
     await ctx.channel.send("pong")
-    
+
+@bot.command(pass_context = True)
+@commands.has_role("Magic")
+async def Magic(ctx):
+    await ctx.channel.send(f"!!!!!! ({ctx.author.name} los convoca a @Magic)")
+
+
 if __name__ == "__main__":
     komi.run(TOKEN)
