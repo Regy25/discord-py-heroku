@@ -29,7 +29,7 @@ async def magic(ctx):
 @komi.command(pass_context = True)
 @commands.has_role("Magic")
 async def magicNoche(ctx): 
-    await ctx.channel.send(f"!!!!!! ({ctx.author.name} los convoca a <@&790022020925882399>)")
+    await ctx.channel.send(f"!!!!!! ({ctx.author.name} los convoca a <@&790022020925882399> en la noche!!)")
 
 if __name__ == "__main__":
     komi.run(TOKEN)
