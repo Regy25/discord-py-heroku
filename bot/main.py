@@ -1,10 +1,10 @@
 import os
 import discord
 from discord.ext import commands
-#test
+
 intents = discord.Intents.all()
 
-komi = commands.Bot(command_prefix={'!k','!k '},intents=intents)
+komi = commands.Bot(command_prefix={'!!'},intents=intents)
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 @komi.event
@@ -17,19 +17,19 @@ async def on_member_join(member):
     await discord.Member.add_roles(member, role)
     print(f'{member} se le dio el rol: {role}')
 
-@komi.command()
-async def ping(ctx):
-    await ctx.channel.send("pong")
 
-@komi.command(pass_context = True)
+@komi.group(name='magic',pass_context = True,invoke_without_command=True)
 @commands.has_role("Magic")
-async def magic(ctx): 
-    await ctx.channel.send(f"!!!!!! ({ctx.author.name} los convoca a <@&790022020925882399>)")
+async def magicDef(ctx):
+    print('!!...')
 
-@komi.command(pass_context = True)
-@commands.has_role("Magic")
-async def magic_noche(ctx): 
-    await ctx.channel.send(f"!!!!!! ({ctx.author.name} los convoca a <@&790022020925882399> en la noche!!)")
+@magicDef.command(name='now')
+async def now(ctx):
+    await ctx.channel.send(f"{ctx.author.name} los convoca a <@&790022020925882399> inmediatamente!")
+
+@magicDef.command(name='night')
+async def noche(ctx): 
+    await ctx.channel.send(f"Esta noche se juega <@&790022020925882399>, preparen sus mazos. Respondan con <:mtg:793655716862754847> para confirmar")
 
 if __name__ == "__main__":
     komi.run(TOKEN)
