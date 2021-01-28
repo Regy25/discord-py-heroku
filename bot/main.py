@@ -30,6 +30,10 @@ async def now(ctx):
 @magicDef.command(name='night')
 async def noche(ctx): 
     await ctx.channel.send(f"Esta noche se juega <@&790022020925882399>, preparen sus mazos. Respondan con <:mtg:793655716862754847> para confirmar")
+    
+@magicDef.command(name='a12')
+async def a12(ctx): 
+    await ctx.channel.send(f"A las 12 se juega <@&790022020925882399>, preparen sus mazos. Respondan con <:mtg:793655716862754847> para confirmar")
 
 if __name__ == "__main__":
     komi.run(TOKEN)
