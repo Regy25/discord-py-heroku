@@ -1,6 +1,8 @@
 import os
 import discord
 from discord.ext import commands
+from bs4 import BeautifulSoup
+import urllib3
 
 intents = discord.Intents.all()
 
@@ -227,5 +229,21 @@ async def a2330(ctx):
 async def a24(ctx):
         await ctx.channel.send(f"A las 24 horas se juega <@&790022020925882399>, preparen sus mazos. Respondan con <:mtg:793655716862754847> para confirmar")
 
+@magicDef.command(name='commander', help="Tira un commander random")
+async def commander(ctx):
+        http = urllib3.PoolManager()
+        pagina = randint(1,20)
+        if pagina == 1:
+            response = http.request("GET", "https://scryfall.com/search?as=grid&order=name&q=%28type%3Alegendary+type%3Acreature%29")
+        else:
+            response = http.request("GET", "https://scryfall.com/search?as=grid&order=name&page=" + str(pagina) +"&q=%28type%3Alegendary+type%3Acreature%29&unique=cards")
+        soup = BeautifulSoup(response.data, "lxml")
+        card_list = []
+        for cards in soup.find_all("div", {"class": "card-grid-item-card-front"}):
+            if cards.img.get("src") != "":
+                card_list.append(cards.img.get("src"))
+            
+        await ctx.send(card_list[randint(0,len(card_list)-1)])
+        
 if __name__ == "__main__":
     komi.run(TOKEN)
