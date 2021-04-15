@@ -2,5 +2,4 @@ discord.py
 flask
 PyNaCl
 dnspython
-bs4
 requests
