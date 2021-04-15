@@ -228,7 +228,7 @@ async def a2330(ctx):
 async def a24(ctx):
         await ctx.channel.send(f"A las 24 horas se juega <@&790022020925882399>, preparen sus mazos. Respondan con <:mtg:793655716862754847> para confirmar")
 
-@komi.command()
+@komi.command(name='commander')
 async def commander(ctx):
         session = requests.Session()
         pagina = randint(1,20)
