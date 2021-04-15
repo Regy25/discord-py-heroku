@@ -230,6 +230,7 @@ async def a24(ctx):
 
 @komi.command(name='commander')
 async def commander(ctx):
+        await ctx.channel.send('testing')
         session = requests.Session()
         pagina = randint(1,20)
 
