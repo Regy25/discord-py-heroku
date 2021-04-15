@@ -3,4 +3,4 @@ flask
 PyNaCl
 dnspython
 bs4
-urllib3
+requests
