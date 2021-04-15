@@ -1,7 +1,6 @@
 import os
 import discord
 from discord.ext import commands
-from bs4 import BeautifulSoup
 import requests
 intents = discord.Intents.all()
 
@@ -230,22 +229,12 @@ async def a24(ctx):
 
 @komi.command(name='commander')
 async def commander(ctx):
-        await ctx.channel.send('testing')
-        session = requests.Session()
-        pagina = randint(1,20)
-
-        if pagina == 1:
-            response = session.get("https://scryfall.com/search?as=grid&order=name&q=%28type%3Alegendary+type%3Acreature%29")
-        else:
-            response = session.get("https://scryfall.com/search?as=grid&order=name&page=" + str(pagina) +"&q=%28type%3Alegendary+type%3Acreature%29&unique=cards")
-    
-        soup = BeautifulSoup(response.content, "html.parser")
-        card_list = []
-        for cards in soup.find_all("div", {"class": "card-grid-item-card-front"}):
-            if cards.img.get("src") != "":
-                card_list.append(cards.img.get("src"))
-            
-        await ctx.send(card_list[randint(0,len(card_list)-1)])
+        params = {'format': 'json', 'q': '(t:legend t:creature) or (o:"can be your commander")'}
+        for i in range(3):
+            req1 = requests.get("https://api.scryfall.com/cards/random", 
+                                params=params)
+            req1_data = req1.json()
+            await ctx.send(req1_data['image_uris']['normal'])
         
 if __name__ == "__main__":
     komi.run(TOKEN)
