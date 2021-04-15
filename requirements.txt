@@ -2,3 +2,5 @@ discord.py
 flask
 PyNaCl
 dnspython
+bs4
+urllib3
