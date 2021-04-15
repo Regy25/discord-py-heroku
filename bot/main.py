@@ -2,8 +2,7 @@ import os
 import discord
 from discord.ext import commands
 from bs4 import BeautifulSoup
-import urllib3
-
+import requests
 intents = discord.Intents.all()
 
 komi = commands.Bot(command_prefix={'!!'},intents=intents)
@@ -231,13 +230,15 @@ async def a24(ctx):
 
 @komi.command()
 async def commander(ctx):
-        http = urllib3.PoolManager()
+        session = requests.Session()
         pagina = randint(1,20)
+
         if pagina == 1:
-            response = http.request("GET", "https://scryfall.com/search?as=grid&order=name&q=%28type%3Alegendary+type%3Acreature%29")
+            response = session.get("https://scryfall.com/search?as=grid&order=name&q=%28type%3Alegendary+type%3Acreature%29")
         else:
-            response = http.request("GET", "https://scryfall.com/search?as=grid&order=name&page=" + str(pagina) +"&q=%28type%3Alegendary+type%3Acreature%29&unique=cards")
-        soup = BeautifulSoup(response.data, "lxml")
+            response = session.get("https://scryfall.com/search?as=grid&order=name&page=" + str(pagina) +"&q=%28type%3Alegendary+type%3Acreature%29&unique=cards")
+    
+        soup = BeautifulSoup(response.content, "html.parser")
         card_list = []
         for cards in soup.find_all("div", {"class": "card-grid-item-card-front"}):
             if cards.img.get("src") != "":
