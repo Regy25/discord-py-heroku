@@ -2,6 +2,7 @@ import os
 import discord
 from discord.ext import commands
 import requests
+from random import randint
 intents = discord.Intents.all()
 
 komi = commands.Bot(command_prefix={'!!'},intents=intents)
@@ -227,14 +228,14 @@ async def a2330(ctx):
 async def a24(ctx):
         await ctx.channel.send(f"A las 24 horas se juega <@&790022020925882399>, preparen sus mazos. Respondan con <:mtg:793655716862754847> para confirmar")
 
-@komi.command(name='commander')
-async def commander(ctx):
-        params = {'format': 'json', 'q': '(t:legend t:creature) or (o:"can be your commander")'}
+@komi.command(name='commander', help='que wea')
+async def com2(ctx):
+        crimefile = open("commanders.txt", 'r')
+        comlist = [line.split(',') for line in crimefile.readlines()]
         for i in range(3):
-            req1 = requests.get("https://api.scryfall.com/cards/random", 
-                                params=params)
-            req1_data = req1.json()
-            await ctx.send(req1_data['image_uris']['normal'])
+            res = comlist[randint(0,len(comlist)-1)]
+            await ctx.send(res[0][:-2])
+            comlist.remove(res)
         
 if __name__ == "__main__":
     komi.run(TOKEN)
