@@ -230,12 +230,14 @@ async def a24(ctx):
 
 @komi.command(name='commander', help='que wea')
 async def com2(ctx):
-        crimefile = open("commanders.txt", 'r')
-        comlist = [line.split(',') for line in crimefile.readlines()]
+        comfile = open("commanders.txt", 'r')
+        comlist = [line.split(',') for line in comfile]
         for i in range(3):
             res = comlist[randint(0,len(comlist)-1)]
             await ctx.send(res[0][:-2])
             comlist.remove(res)
+        
+        comfile.close()
         
 if __name__ == "__main__":
     komi.run(TOKEN)
