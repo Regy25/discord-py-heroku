@@ -229,12 +229,12 @@ async def a24(ctx):
         await ctx.channel.send(f"A las 24 horas se juega <@&790022020925882399>, preparen sus mazos. Respondan con <:mtg:793655716862754847> para confirmar")
 
 @komi.command(name='commander', help='que wea')
-async def com2(ctx):
+async def com(ctx):
         comfile = open("commanders.txt", 'r')
-        comlist = [line.split(',') for line in comfile]
+        comlist = [line.split() for line in comfile]
         for i in range(3):
             res = comlist[randint(0,len(comlist)-1)]
-            await ctx.send(res[0][:-2])
+            await ctx.channel.send(res[0])
             comlist.remove(res)
         
         comfile.close()
